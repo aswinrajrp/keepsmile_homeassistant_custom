@@ -13,6 +13,7 @@ from ..generic.command import *
 from ..generic.command import Command
 from .compilers.ks03_old.compiler import KS03OldCompiler
 from .compilers.ks03_new.compiler import KS03NewCompiler
+from .compilers.ks05.compiler import KS05Compiler
 
 class DeviceNamePrefix(Enum):
     """
@@ -120,6 +121,20 @@ devices_by_prefix = {
             ],
             compiler=KS03NewCompiler,
             get_transmitter=make_transmitter_fetcher(DeviceNamePrefix.KS03_New),
+        ),
+
+        DeviceNamePrefix.KS05: DeviceProfile(
+            supported_commands=[
+                SwitchCommand,
+                BrightnessCommand,
+                ColorTemperatureCommand,
+                WhiteCommand,
+                RGBCommand,
+                EffectCommand,
+                SpeedCommand
+            ],
+            compiler=KS05Compiler,
+            get_transmitter=make_transmitter_fetcher(DeviceNamePrefix.KS05),
         ),
     }
 
